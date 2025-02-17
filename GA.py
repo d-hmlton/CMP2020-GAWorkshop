@@ -65,21 +65,22 @@ class GA():
         #  The fitnesses of the population are stored in self.fitnesses.   
         #   i.e. the fitness of self.population[i] is self.fitnesses[i]
 
+        #Since population and fitness become uncoupled when randomising the population, resolving that by pairing them up in another list
         individualFitnessPairs = []
         for pair in range(len(self.population)):
             individualFitnessPairs.append([self.population[pair], self.fitnesses[pair]])
 
-        #Makes a list of indices corresponding to the population. Will only act on these indices, rather than the whole population
+        #Creates a random sample of three individuals from the population
         k = random.sample(individualFitnessPairs, 3)
 
-        #Saves the first value to int 'lowest'. Will be compared to others
+        #Saves the fitness of the first individual to int 'lowest'. Will be compared to others
         lowest = k[0][1]
 
-        for individual in range(1, len(k)): #Starts at 1 - skips 0 since it's already 'lowest'
+        for individual in range(1, len(k)): #Starts at pos 1 - skips pos 0 since it's already 'lowest'
             if k[individual][1] <= lowest: #"less than or equal to" - biased towards new solutions of equal value
                 lowest = individual
 
-        return k[lowest][0]
+        return k[lowest][0] #Returns the individual with the lowest fitness (or, if equally low, the furthest along the sample)
     
     
     
