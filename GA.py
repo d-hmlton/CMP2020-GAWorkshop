@@ -70,17 +70,17 @@ class GA():
         for pair in range(len(self.population)):
             individualFitnessPairs.append([self.population[pair], self.fitnesses[pair]])
 
-        #Creates a random sample of three individuals from the population
-        k = random.sample(individualFitnessPairs, 3)
+        #Creates a random sample of 'k' (by default, 3) individuals from the population
+        sampleList = random.sample(individualFitnessPairs, k)
 
         #Saves the fitness of the first individual to int 'lowest'. Will be compared to others
-        lowest = k[0][1]
+        lowest = sampleList[0][1]
 
-        for individual in range(1, len(k)): #Starts at pos 1 - skips pos 0 since it's already 'lowest'
-            if k[individual][1] <= lowest: #"less than or equal to" - biased towards new solutions of equal value
+        for individual in range(1, len(sampleList)): #Starts at pos 1 - skips pos 0 since it's already 'lowest'
+            if sampleList[individual][1] <= lowest: #"less than or equal to" - biased towards new solutions of equal value
                 lowest = individual
 
-        return k[lowest][0] #Returns the individual with the lowest fitness (or, if equally low, the furthest along the sample)
+        return sampleList[lowest][0] #Returns the individual with the lowest fitness (or, if equally low, the furthest along the sample)
     
     
     
