@@ -73,13 +73,13 @@ class GA():
         k = random.sample(individualFitnessPairs, 3)
 
         #Saves the first value to int 'lowest'. Will be compared to others
-        lowest = 0
+        lowest = k[0][1]
 
-        for individual in range(1, len(individualFitnessPairs)): #Starts at 1 - skips 0 since it's already 'lowest'
-            if individualFitnessPairs[individual][1] <= lowest: #"less than or equal to" - biased towards new solutions of equal value
+        for individual in range(1, len(k)): #Starts at 1 - skips 0 since it's already 'lowest'
+            if k[individual][1] <= lowest: #"less than or equal to" - biased towards new solutions of equal value
                 lowest = individual
 
-        return individualFitnessPairs[individual][0]
+        return k[lowest][0]
     
     
     
