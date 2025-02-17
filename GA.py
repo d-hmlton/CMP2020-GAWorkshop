@@ -64,8 +64,22 @@ class GA():
         # Select the best individual from the k individuals (individual with the lowest fitness) and return it.
         #  The fitnesses of the population are stored in self.fitnesses.   
         #   i.e. the fitness of self.population[i] is self.fitnesses[i]
-        
-        return [] # <-- remove this line when you have added your implementation
+
+        individualFitnessPairs = []
+        for pair in range(len(self.population)):
+            individualFitnessPairs.append([self.population[pair], self.fitnesses[pair]])
+
+        #Makes a list of indices corresponding to the population. Will only act on these indices, rather than the whole population
+        k = random.sample(individualFitnessPairs, 3)
+
+        #Saves the first value to int 'lowest'. Will be compared to others
+        lowest = 0
+
+        for individual in range(1, len(individualFitnessPairs)): #Starts at 1 - skips 0 since it's already 'lowest'
+            if individualFitnessPairs[individual][1] <= lowest: #"less than or equal to" - biased towards new solutions of equal value
+                lowest = individual
+
+        return individualFitnessPairs[individual][0]
     
     
     
