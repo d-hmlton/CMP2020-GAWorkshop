@@ -74,14 +74,13 @@ class GA():
         sampleList = random.sample(individualFitnessPairs, k)
 
         #Saves the fitness of the first individual to int 'lowest'. Will be compared to others
-        lowest = sampleList[0][1]
-
+        lowIndex = 0
+    
         for individual in range(1, len(sampleList)): #Starts at pos 1 - skips pos 0 since it's already 'lowest'
-            if sampleList[individual][1] <= lowest: #"less than or equal to" - biased towards new solutions of equal value
-                lowest = individual
-
-        print(sampleList[lowest][1])
-        return sampleList[lowest][0] #Returns the individual with the lowest fitness (or, if equally low, the furthest along the sample)
+            if sampleList[individual][1] <= sampleList[lowIndex][1]: #"less than or equal to" - biased towards new solutions of equal value
+                lowIndex = individual
+                
+        return sampleList[lowIndex][0] #Returns the individual with the lowest fitness (or, if equally low, the furthest along the sample)
     
     
     def performCrossover(self, parent1, parent2): 

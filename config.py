@@ -31,6 +31,6 @@ mutationRate = 0.1
 
 displayBestAfterEachGeneration = True
 
-mode = MODE.MUTATION_TEST
+mode = MODE.RUN_GA
 
 
