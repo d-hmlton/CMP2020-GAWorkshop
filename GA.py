@@ -80,19 +80,43 @@ class GA():
             if sampleList[individual][1] <= lowest: #"less than or equal to" - biased towards new solutions of equal value
                 lowest = individual
 
+        print(sampleList[lowest][1])
         return sampleList[lowest][0] #Returns the individual with the lowest fitness (or, if equally low, the furthest along the sample)
-    
     
     
     def performCrossover(self, parent1, parent2): 
         # you need to write this method
-        return [parent1.copy(), parent2.copy()] # <-- remove this line when you have added your implementation
-       
+
+        crossoverRandom = random.randint(0, 10) #Generate value somewhere in crossover rate range (need to divide by 10 after)
+
+        if (crossoverRandom / 10) < config.crossoverRate: #If the random value is below the crossover rate:
+            crossoverRandom = random.randint(1, 6)
+            child1 = parent1.copy() #Saves parent 1's list to 'child1'
+            child2 = parent2.copy() #Saves parent 2's list to 'child2'
+            for x in range(crossoverRandom, 7): #From the crossover point to the end of the child, swaps values to be other parent
+                child1[x] = parent2[x]
+                child2[x] = parent1[x]
+            return [child1, child2] #Returns children
+
+        else: #If the random value is above or equal to the crossover rate:
+            return [parent1.copy(), parent2.copy()] #Returns (copy of) parents
        
         
     def performMutation(self, individual): 
         # you need to write this method
-        return individual # <-- remove this line when you have added your implementation
+        
+        #Mutator
+        for gene in range(len(individual)): #Cycles through all the 'genes'
+            mutationRandom = random.randint(0, 10) #Generate value in mutation rate range (0.1 by default)
+            print(mutationRandom / 10, config.mutationRate)
+            if (mutationRandom / 10) < config.mutationRate: #If below the mutation rate:
+                while True:
+                    mutationRandom = random.randint(0, (config.numberOfLocations - 1)) #Generate an integer for the mutation
+                    if individual[gene] != mutationRandom:
+                        break
+                individual[gene] = mutationRandom #Save the integer over the original gene
+        
+        return individual
        
     #  End of methods you need to modify
     #####################################   

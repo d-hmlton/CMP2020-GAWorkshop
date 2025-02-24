@@ -31,6 +31,6 @@ mutationRate = 0.1
 
 displayBestAfterEachGeneration = True
 
-mode = MODE.SELECTION_TEST
+mode = MODE.MUTATION_TEST
 
 
